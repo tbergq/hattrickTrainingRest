@@ -3,8 +3,8 @@ from rest_framework import routers
 from Teams import views
 
 router = routers.DefaultRouter()
-router.register(r'teams', views.TeamViewSet)
-router.register(r'teams/(?P<team_id>[0-9]+)/players', views.PlayerViewSet)
+router.register(r'', views.TeamViewSet)
+router.register(r'(?P<team_id>[0-9]+)/players', views.PlayerViewSet)
 
 
 # Wire up our API using automatic URL routing.
