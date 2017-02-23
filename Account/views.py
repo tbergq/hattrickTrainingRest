@@ -1,17 +1,16 @@
 from django.contrib.auth.models import User, Group
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets, mixins, generics
 from Account.serializers import UserSerializer, GroupSerializer
 
 
-class UserViewSet(mixins.CreateModelMixin,
-                  mixins.ListModelMixin,
-                  mixins.RetrieveModelMixin,
-                  viewsets.GenericViewSet):
+class UserViewSet(generics.CreateAPIView):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = User.objects.all().order_by('-date_joined')
+    queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = ()
+
 
 
 class GroupViewSet(viewsets.ModelViewSet):
