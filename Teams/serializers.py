@@ -1,6 +1,5 @@
-from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from models import Team
+from models import Team, Player
 from Account.serializers import UserSerializer
 
 
@@ -15,3 +14,9 @@ class TeamSerializer(serializers.HyperlinkedModelSerializer):
         team = Team.objects.create(user_id=user.id, **validated_data)
         print validated_data
         return team
+
+
+class PlayerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Player
+        fields = '__all__'

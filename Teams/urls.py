@@ -4,6 +4,7 @@ from Teams import views
 
 router = routers.DefaultRouter()
 router.register(r'teams', views.TeamViewSet)
+router.register(r'teams/(?P<team_id>[0-9]+)/players', views.PlayerViewSet)
 
 
 # Wire up our API using automatic URL routing.
