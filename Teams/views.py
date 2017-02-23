@@ -6,6 +6,7 @@ from serializers import TeamSerializer
 class TeamViewSet(mixins.CreateModelMixin,
                   mixins.ListModelMixin,
                   mixins.RetrieveModelMixin,
+                  mixins.DestroyModelMixin,
                   viewsets.GenericViewSet):
     """
     API endpoint that allows users to be viewed or edited.
