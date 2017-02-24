@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 import datetime
+import pymysql
+
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,7 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 CORS_ORIGIN_ALLOW_ALL = True
-APPEND_SLASH=False
+APPEND_SLASH = False
 
 # Application definition
 
@@ -95,8 +98,11 @@ WSGI_APPLICATION = 'hattrickTraining.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'hattrick',
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'tronbe',
+        'PASSWORD': '123456',
+        'HOST': 'localhost',
     }
 }
 
