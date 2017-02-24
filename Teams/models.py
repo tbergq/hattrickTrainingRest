@@ -19,3 +19,19 @@ class Player(models.Model):
     passing = models.IntegerField()
     scoring = models.IntegerField()
     set_pieces = models.IntegerField()
+
+class Change(models.Model):
+    SKILL_TYPES = (
+        ('keeper', 'keeper'),
+        ('defending', 'defending'),
+        ('playmaking', 'playmaking'),
+        ('winger', 'winger'),
+        ('passing', 'passing'),
+        ('scoring', 'scoring'),
+        ('set_pieces', 'set_pieces'),
+    )
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    change_date = models.DateField()
+    old_value = models.IntegerField()
+    new_value = models.IntegerField()
+    skill = models.CharField(max_length=255, choices=SKILL_TYPES)

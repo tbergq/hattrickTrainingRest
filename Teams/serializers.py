@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from models import Team, Player
-from Account.serializers import UserSerializer
+from models import Team, Player, Change
 
 
 class TeamSerializer(serializers.HyperlinkedModelSerializer):
@@ -19,4 +18,9 @@ class TeamSerializer(serializers.HyperlinkedModelSerializer):
 class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Player
+        fields = '__all__'
+
+class ChangeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Change
         fields = '__all__'
