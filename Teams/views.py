@@ -31,7 +31,7 @@ class PlayerViewSet(mixins.CreateModelMixin,
     serializer_class = PlayerSerializer
 
     def get_queryset(self):
-        return Player.objects.filter(team_id=self.kwargs['team_id'])
+        return Player.objects.filter(team_id=self.kwargs['team_id'], team__user_id=self.request.user.id)
 
 
 class ChangeViewSet(mixins.CreateModelMixin,
@@ -44,4 +44,7 @@ class ChangeViewSet(mixins.CreateModelMixin,
     serializer_class = ChangeSerializer
 
     def get_queryset(self):
-        return Change.objects.filter(player_id=self.kwargs['player_id']).order_by('-change_date')
+        return Change.objects.filter(
+            player_id=self.kwargs['player_id'],
+            player__team__user_id=self.request.user.id
+        ).order_by('-change_date')
