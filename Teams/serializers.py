@@ -24,3 +24,9 @@ class ChangeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Change
         fields = '__all__'
+
+class TeamChangeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Change
+        fields = '__all__'
+        depth = 1

@@ -1,6 +1,6 @@
 from models import Team, Player, Change
 from rest_framework import viewsets, mixins
-from serializers import TeamSerializer, PlayerSerializer, ChangeSerializer
+from serializers import TeamSerializer, PlayerSerializer, ChangeSerializer, TeamChangeSerializer
 
 
 # Create your views here.
@@ -46,5 +46,17 @@ class ChangeViewSet(mixins.CreateModelMixin,
     def get_queryset(self):
         return Change.objects.filter(
             player_id=self.kwargs['player_id'],
+            player__team__user_id=self.request.user.id
+        ).order_by('-change_date')
+
+
+class TeamChangeViewSet(mixins.ListModelMixin,
+                        viewsets.GenericViewSet):
+    queryset = Change.objects.all()
+    serializer_class = TeamChangeSerializer
+
+    def get_queryset(self):
+        return Change.objects.filter(
+            player__team_id=self.kwargs['team_id'],
             player__team__user_id=self.request.user.id
         ).order_by('-change_date')
